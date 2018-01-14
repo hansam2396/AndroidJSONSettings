@@ -87,6 +87,14 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/loadBtn"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/load" />
+
+            <Button
                 android:id="@+id/saveBtn"
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="wrap_content"
@@ -94,13 +102,6 @@
                 android:layout_weight="1"
                 android:text="@string/save" />
 
-            <Button
-                android:id="@+id/cancelBtn"
-                style="@style/Widget.AppCompat.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/cancel" />
         </LinearLayout>
 
         <GridLayout

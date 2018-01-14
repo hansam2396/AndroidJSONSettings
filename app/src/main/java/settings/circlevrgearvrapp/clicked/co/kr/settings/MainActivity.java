@@ -1,9 +1,12 @@
 package settings.circlevrgearvrapp.clicked.co.kr.settings;
 
+import android.Manifest;
 import android.content.res.AssetManager;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,7 +22,6 @@ import java.io.InputStreamReader;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
-import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,16 +35,49 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button saveBtn = (Button) findViewById(R.id.saveBtn);
-        Button cancelBtn = (Button) findViewById(R.id.cancelBtn);
+        Button loadBtn = (Button) findViewById(R.id.loadBtn);
         Button exitBtn = (Button) findViewById(R.id.exitBtn);
 
-        EditText ipTxt = (EditText) findViewById(R.id.ipInput);
-        EditText portTxt = (EditText) findViewById(R.id.portInput);
-        EditText userIDTxt = (EditText) findViewById(R.id.userIdInput);
+        final EditText ipTxt = (EditText) findViewById(R.id.ipInput);
+        final EditText portTxt = (EditText) findViewById(R.id.portInput);
+        final EditText userIDTxt = (EditText) findViewById(R.id.userIdInput);
 
-        //ReadConfigJson();
-        ReadFile();
+        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE);
+
+        loadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                parseJSONData();
+                ipTxt.setText(new String(ip));
+                portTxt.setText(new String(String.valueOf(port)));
+                userIDTxt.setText((new String(userId)));
+            }
+        });
+        
+
     }
+
+    public void parseJSONData()
+    {
+        String JSONString = null;
+        JSONObject JSONObject = null;
+        try{
+            FileInputStream is = new FileInputStream("/sdcard/circlevr/config.json");
+            byte[] bytes = new byte[is.available()];
+            is.read(bytes);
+            is.close();
+            JSONString = new String(bytes, "UTF-8");
+            JSONObject = new JSONObject(JSONString);
+
+            ip = JSONObject.getString("gcsAddress");
+            port = JSONObject.getInt("gcsPort");
+            userId = JSONObject.getString("UserID");
+        }
+        catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     void ReadFile (){
         try {
             File yourFile = new File(Environment.getExternalStorageDirectory(),"/circlevr/config.json");
