@@ -3,12 +3,11 @@
     <string name="ip">IP</string>
     <string name="user_id">USER ID</string>
     <string name="port">PORT</string>
-    <string name="_1">1</string>
     <string name="_10101">10101</string>
     <string name="_192_168_0_103">192.168.0.103</string>
     <string name="_1000">1000</string>
-    <string name="save">SAVE</string>
-    <string name="cancel">CANCEL</string>
-    <string name="exit">EXIT</string>
-    <string name="load">LOAD</string>
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
 </resources>

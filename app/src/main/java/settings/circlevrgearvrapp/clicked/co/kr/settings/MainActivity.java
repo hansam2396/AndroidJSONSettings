@@ -4,9 +4,13 @@ import android.Manifest;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -21,60 +25,99 @@ public class MainActivity extends AppCompatActivity {
     String ip;
     int port;
     String userId;
-    boolean isLoaded;
+
+    EditText ipTxt;
+    EditText portTxt;
+    RadioGroup radioGroup;
+
+    RadioButton radioButton1;
+    RadioButton radioButton2;
+    RadioButton radioButton3;
+    RadioButton radioButton4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button saveBtn = (Button) findViewById(R.id.saveBtn);
-        Button loadBtn = (Button) findViewById(R.id.loadBtn);
-        Button exitBtn = (Button) findViewById(R.id.exitBtn);
-
-        final EditText ipTxt = (EditText) findViewById(R.id.ipInput);
-        final EditText portTxt = (EditText) findViewById(R.id.portInput);
-        final EditText userIDTxt = (EditText) findViewById(R.id.userIdInput);
+        ipTxt = (EditText) findViewById(R.id.ipInput);
+        portTxt = (EditText) findViewById(R.id.portInput);
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        radioButton1 = (RadioButton) findViewById(R.id.radioButton1);
+        radioButton2 = (RadioButton) findViewById(R.id.radioButton2);
+        radioButton3 = (RadioButton) findViewById(R.id.radioButton3);
+        radioButton4 = (RadioButton) findViewById(R.id.radioButton4);
 
         ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE);
 
-        loadBtn.setOnClickListener(new View.OnClickListener() {
+        if(parseJSONData()){
+            ipTxt.setText(new String(ip));
+            portTxt.setText(new String(String.valueOf(port)));
+            int index = Integer.parseInt(new String(userId));
+            if(index==0)
+                radioGroup.check(radioButton1.getId());
+            else if(index==1)
+                radioGroup.check(radioButton2.getId());
+            else if(index==2)
+                radioGroup.check(radioButton3.getId());
+            else if(index==3)
+                radioGroup.check(radioButton4.getId());
+        }
+
+        ipTxt.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View view) {
-                parseJSONData();
-                ipTxt.setText(new String(ip));
-                portTxt.setText(new String(String.valueOf(port)));
-                userIDTxt.setText((new String(userId)));
-                isLoaded = true;
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                setJson();
             }
-        });
-        
-        saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if (isLoaded == false) {
-                    Toast.makeText(getApplicationContext(), "데이터를 입력하세요.", Toast.LENGTH_SHORT).show();
-                } else {
-                    JSONObject data = new JSONObject();
-                    try {
-                        data.put("gcsAddress", ipTxt.getText().toString());
-                        data.put("gcsPort", Integer.parseInt(portTxt.getText().toString()));
-                        data.put("UserID", userIDTxt.getText().toString());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    parseStringData(data);
-                }
+            public void afterTextChanged(Editable s) {
             }
         });
 
-        exitBtn.setOnClickListener(new View.OnClickListener() {
+        portTxt.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                moveTaskToBack(true);
-                finish();
-                android.os.Process.killProcess(android.os.Process.myPid());
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                setJson();
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
             }
         });
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                setJson();
+            }
+        });
+    }
+
+    public  void setJson()
+    {
+        JSONObject data = new JSONObject();
+        int index = 0;
+        if(radioGroup.getCheckedRadioButtonId()==radioButton1.getId())
+            index = 0;
+        else if(radioGroup.getCheckedRadioButtonId()==radioButton2.getId())
+            index = 1;
+        else if(radioGroup.getCheckedRadioButtonId()==radioButton3.getId())
+            index = 2;
+        else if(radioGroup.getCheckedRadioButtonId()==radioButton4.getId())
+            index = 3;
+
+        try {
+            data.put("gcsAddress", ipTxt.getText().toString());
+            data.put("gcsPort", Integer.parseInt(portTxt.getText().toString()));
+            data.put("UserID", String.valueOf(index));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        parseStringData(data);
     }
 
     public void parseStringData(Object inputObject)
@@ -84,13 +127,12 @@ public class MainActivity extends AppCompatActivity {
             byte[] bytes = inputObject.toString().getBytes();
             fOut.write(bytes);
             fOut.close();
-            Toast.makeText(this, "저장 완료", Toast.LENGTH_SHORT).show();
         }catch(IOException e){
             e.printStackTrace();
         }
     }
 
-    public void parseJSONData()
+    public boolean parseJSONData()
     {
         String JSONString = null;
         JSONObject JSONObject = null;
@@ -107,9 +149,11 @@ public class MainActivity extends AppCompatActivity {
             userId = JSONObject.getString("UserID");
 
             Toast.makeText(this, "로드 완료", Toast.LENGTH_SHORT).show();
+            return true;
         }
         catch (IOException | JSONException e) {
             e.printStackTrace();
+            return false;
         }
     }
 }
