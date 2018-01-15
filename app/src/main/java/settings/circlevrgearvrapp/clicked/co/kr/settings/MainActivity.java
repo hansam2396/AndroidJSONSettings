@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     String ip;
     int port;
     String userId;
-
+    boolean isLoaded;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,21 +44,26 @@ public class MainActivity extends AppCompatActivity {
                 ipTxt.setText(new String(ip));
                 portTxt.setText(new String(String.valueOf(port)));
                 userIDTxt.setText((new String(userId)));
+                isLoaded = true;
             }
         });
         
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                JSONObject data = new JSONObject();
-                try {
-                    data.put("gcsAddress", ipTxt.getText().toString());
-                    data.put("gcsPort", Integer.parseInt(portTxt.getText().toString()));
-                    data.put("UserID", userIDTxt.getText().toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (isLoaded == false) {
+                    Toast.makeText(getApplicationContext(), "데이터를 입력하세요.", Toast.LENGTH_SHORT).show();
+                } else {
+                    JSONObject data = new JSONObject();
+                    try {
+                        data.put("gcsAddress", ipTxt.getText().toString());
+                        data.put("gcsPort", Integer.parseInt(portTxt.getText().toString()));
+                        data.put("UserID", userIDTxt.getText().toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    parseStringData(data);
                 }
-                parseStringData(data);
             }
         });
 
