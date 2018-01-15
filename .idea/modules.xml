@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidJSONSettings.iml" filepath="$PROJECT_DIR$/AndroidJSONSettings.iml" />
-      <module fileurl="file://C:\Users\Clicked_Demo\Documents\GitHub\AndroidJSONSettings\AndroidJSONSettings.iml" filepath="C:\Users\Clicked_Demo\Documents\GitHub\AndroidJSONSettings\AndroidJSONSettings.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\Clicked_Demo\Documents\GitHub\AndroidJSONSettings\app\app.iml" filepath="C:\Users\Clicked_Demo\Documents\GitHub\AndroidJSONSettings\app\app.iml" />
     </modules>
   </component>
 </project>
