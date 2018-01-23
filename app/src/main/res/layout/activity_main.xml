@@ -9,8 +9,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="bottom"
         android:orientation="vertical"
         android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/circlevr_logo"
+            android:scaleType="center"
+            app:srcCompat="@drawable/circlevr"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,7 +35,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/ip"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/ipInput"
@@ -42,11 +55,12 @@
 
             <TextView
                 android:id="@+id/portTitle"
-                android:layout_width="13dp"
+                android:layout_width="17dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/port"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/portInput"
@@ -60,53 +74,70 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/userIdTitle"
-                android:layout_width="181dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/user_id"
-                android:textAlignment="center"
-                android:textSize="14sp" />
-
-            <RadioGroup
-                android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:text="@string/user_id"
+                android:textAlignment="center"
+                android:textSize="18sp" />
 
-                <RadioButton
-                    android:id="@+id/radioButton1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:text="@string/_0" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/radioButton2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:text="@string/_1" />
+                <ToggleButton
+                    android:id="@+id/btn0"
+                    style="@style/btnStyleAcapulco"
+                    android:layout_width="match_parent"
+                    android:layout_height="66dp"
+                    android:layout_weight="1"
+                    android:textOff="@string/_0"
+                    android:textOn="@string/_0"
+                    android:textSize="24sp" />
 
-                <RadioButton
-                    android:id="@+id/radioButton3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:text="@string/_2" />
+                <ToggleButton
+                    android:id="@+id/btn1"
+                    style="@style/btnStyleAcapulco"
+                    android:layout_width="match_parent"
+                    android:layout_height="66dp"
+                    android:layout_weight="1"
+                    android:textOff="@string/_1"
+                    android:textOn="@string/_1"
+                    android:textSize="24sp" />
+            </LinearLayout>
 
-                <RadioButton
-                    android:id="@+id/radioButton4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:text="@string/_3" />
-            </RadioGroup>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/btn2"
+                    style="@style/btnStyleAcapulco"
+                    android:layout_width="match_parent"
+                    android:layout_height="66dp"
+                    android:layout_weight="1"
+                    android:textOff="@string/_2"
+                    android:textOn="@string/_2"
+                    android:textSize="24sp" />
+
+                <ToggleButton
+                    android:id="@+id/btn3"
+                    style="@style/btnStyleAcapulco"
+                    android:layout_width="match_parent"
+                    android:layout_height="66dp"
+                    android:layout_weight="1"
+                    android:textOff="@string/_3"
+                    android:textOn="@string/_3"
+                    android:textSize="24sp" />
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -9,9 +9,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,12 +27,11 @@ public class MainActivity extends AppCompatActivity {
 
     EditText ipTxt;
     EditText portTxt;
-    RadioGroup radioGroup;
 
-    RadioButton radioButton1;
-    RadioButton radioButton2;
-    RadioButton radioButton3;
-    RadioButton radioButton4;
+    ToggleButton btn_0;
+    ToggleButton btn_1;
+    ToggleButton btn_2;
+    ToggleButton btn_3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +40,10 @@ public class MainActivity extends AppCompatActivity {
 
         ipTxt = (EditText) findViewById(R.id.ipInput);
         portTxt = (EditText) findViewById(R.id.portInput);
-        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-        radioButton1 = (RadioButton) findViewById(R.id.radioButton1);
-        radioButton2 = (RadioButton) findViewById(R.id.radioButton2);
-        radioButton3 = (RadioButton) findViewById(R.id.radioButton3);
-        radioButton4 = (RadioButton) findViewById(R.id.radioButton4);
+        btn_0 = (ToggleButton) findViewById(R.id.btn0);
+        btn_1 = (ToggleButton) findViewById(R.id.btn1);
+        btn_2 = (ToggleButton) findViewById(R.id.btn2);
+        btn_3 = (ToggleButton) findViewById(R.id.btn3);
 
         ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE);
 
@@ -54,14 +51,15 @@ public class MainActivity extends AppCompatActivity {
             ipTxt.setText(new String(ip));
             portTxt.setText(new String(String.valueOf(port)));
             int index = Integer.parseInt(new String(userId));
-            if(index==0)
-                radioGroup.check(radioButton1.getId());
-            else if(index==1)
-                radioGroup.check(radioButton2.getId());
-            else if(index==2)
-                radioGroup.check(radioButton3.getId());
-            else if(index==3)
-                radioGroup.check(radioButton4.getId());
+
+            if(index == 0)
+                btn_0.setChecked(true);
+            else if(index == 1)
+                btn_1.setChecked(true);
+            else if(index == 2)
+                btn_2.setChecked(true);
+            else if(index == 3)
+                btn_3.setChecked(true);
         }
 
         ipTxt.addTextChangedListener(new TextWatcher() {
@@ -88,9 +86,50 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        btn_0.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
+            public void onClick(View v) {
+                btn_0.setChecked(true);
+                btn_1.setChecked(false);
+                btn_2.setChecked(false);
+                btn_3.setChecked(false);
+
+                setJson();
+            }
+        });
+
+        btn_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn_0.setChecked(false);
+                btn_1.setChecked(true);
+                btn_2.setChecked(false);
+                btn_3.setChecked(false);
+
+                setJson();
+            }
+        });
+
+        btn_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn_0.setChecked(false);
+                btn_1.setChecked(false);
+                btn_2.setChecked(true);
+                btn_3.setChecked(false);
+
+                setJson();
+            }
+        });
+
+        btn_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn_0.setChecked(false);
+                btn_1.setChecked(false);
+                btn_2.setChecked(false);
+                btn_3.setChecked(true);
+
                 setJson();
             }
         });
@@ -99,14 +138,15 @@ public class MainActivity extends AppCompatActivity {
     public  void setJson()
     {
         JSONObject data = new JSONObject();
-        int index = 0;
-        if(radioGroup.getCheckedRadioButtonId()==radioButton1.getId())
+        int index=0;
+
+        if(btn_0.isChecked())
             index = 0;
-        else if(radioGroup.getCheckedRadioButtonId()==radioButton2.getId())
+        else if(btn_1.isChecked())
             index = 1;
-        else if(radioGroup.getCheckedRadioButtonId()==radioButton3.getId())
+        else if(btn_2.isChecked())
             index = 2;
-        else if(radioGroup.getCheckedRadioButtonId()==radioButton4.getId())
+        else if(btn_3.isChecked())
             index = 3;
 
         try {
