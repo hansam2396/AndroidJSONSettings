@@ -6,8 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -26,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
     EditText ipTxt;
     EditText portTxt;
 
+    Button btn_0;
+    Button btn_1;
+    Button btn_2;
+    Button btn_3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
         ipTxt = (EditText) findViewById(R.id.ipInput);
         portTxt = (EditText) findViewById(R.id.portInput);
+        btn_0 = (Button) findViewById(R.id.btn0);
+        btn_1 = (Button) findViewById(R.id.btn1);
+        btn_2 = (Button) findViewById(R.id.btn2);
+        btn_3 = (Button) findViewById(R.id.btn3);
 
         ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE);
 
@@ -41,6 +51,14 @@ public class MainActivity extends AppCompatActivity {
             portTxt.setText(new String(String.valueOf(port)));
             int index = Integer.parseInt(new String(userId));
 
+            if(index == 0)
+                btn_0.setPressed(true);
+            else if(index == 1)
+                btn_1.setPressed(true);
+            else if(index == 2)
+                btn_2.setPressed(true);
+            else if(index == 3)
+                btn_3.setPressed(true);
         }
 
         ipTxt.addTextChangedListener(new TextWatcher() {
@@ -67,13 +85,68 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btn_0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn_0.setPressed(true);
+                btn_1.setPressed(false);
+                btn_2.setPressed(false);
+                btn_3.setPressed(false);
 
+                setJson();
+            }
+        });
+
+        btn_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn_0.setPressed(false);
+                btn_1.setPressed(true);
+                btn_2.setPressed(false);
+                btn_3.setPressed(false);
+
+                setJson();
+            }
+        });
+
+        btn_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn_0.setPressed(false);
+                btn_1.setPressed(false);
+                btn_2.setPressed(true);
+                btn_3.setPressed(false);
+
+                setJson();
+            }
+        });
+
+        btn_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn_0.setPressed(false);
+                btn_1.setPressed(false);
+                btn_2.setPressed(false);
+                btn_3.setPressed(true);
+
+                setJson();
+            }
+        });
     }
 
     public  void setJson()
     {
         JSONObject data = new JSONObject();
-        int index = 0;
+        int index=0;
+
+        if(btn_0.isPressed())
+            index = 0;
+        else if(btn_1.isPressed())
+            index = 1;
+        else if(btn_2.isPressed())
+            index = 2;
+        else if(btn_3.isPressed())
+            index = 3;
 
         try {
             data.put("gcsAddress", ipTxt.getText().toString());

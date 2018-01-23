@@ -92,7 +92,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/btn0"
                     style="@style/btnStyleAcapulco"
                     android:layout_width="match_parent"
                     android:layout_height="66dp"
@@ -101,7 +101,7 @@
                     android:textSize="24sp" />
 
                 <Button
-                    android:id="@+id/button3"
+                    android:id="@+id/btn1"
                     style="@style/btnStyleAcapulco"
                     android:layout_width="match_parent"
                     android:layout_height="66dp"
@@ -117,7 +117,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/button4"
+                    android:id="@+id/btn2"
                     style="@style/btnStyleAcapulco"
                     android:layout_width="match_parent"
                     android:layout_height="66dp"
@@ -126,7 +126,7 @@
                     android:textSize="24sp" />
 
                 <Button
-                    android:id="@+id/button5"
+                    android:id="@+id/btn3"
                     style="@style/btnStyleAcapulco"
                     android:layout_width="match_parent"
                     android:layout_height="66dp"
