@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,10 +28,10 @@ public class MainActivity extends AppCompatActivity {
     EditText ipTxt;
     EditText portTxt;
 
-    Button btn_0;
-    Button btn_1;
-    Button btn_2;
-    Button btn_3;
+    ToggleButton btn_0;
+    ToggleButton btn_1;
+    ToggleButton btn_2;
+    ToggleButton btn_3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +40,10 @@ public class MainActivity extends AppCompatActivity {
 
         ipTxt = (EditText) findViewById(R.id.ipInput);
         portTxt = (EditText) findViewById(R.id.portInput);
-        btn_0 = (Button) findViewById(R.id.btn0);
-        btn_1 = (Button) findViewById(R.id.btn1);
-        btn_2 = (Button) findViewById(R.id.btn2);
-        btn_3 = (Button) findViewById(R.id.btn3);
+        btn_0 = (ToggleButton) findViewById(R.id.btn0);
+        btn_1 = (ToggleButton) findViewById(R.id.btn1);
+        btn_2 = (ToggleButton) findViewById(R.id.btn2);
+        btn_3 = (ToggleButton) findViewById(R.id.btn3);
 
         ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE);
 
@@ -52,13 +53,13 @@ public class MainActivity extends AppCompatActivity {
             int index = Integer.parseInt(new String(userId));
 
             if(index == 0)
-                btn_0.setPressed(true);
+                btn_0.setChecked(true);
             else if(index == 1)
-                btn_1.setPressed(true);
+                btn_1.setChecked(true);
             else if(index == 2)
-                btn_2.setPressed(true);
+                btn_2.setChecked(true);
             else if(index == 3)
-                btn_3.setPressed(true);
+                btn_3.setChecked(true);
         }
 
         ipTxt.addTextChangedListener(new TextWatcher() {
@@ -88,10 +89,10 @@ public class MainActivity extends AppCompatActivity {
         btn_0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn_0.setPressed(true);
-                btn_1.setPressed(false);
-                btn_2.setPressed(false);
-                btn_3.setPressed(false);
+                btn_0.setChecked(true);
+                btn_1.setChecked(false);
+                btn_2.setChecked(false);
+                btn_3.setChecked(false);
 
                 setJson();
             }
@@ -100,10 +101,10 @@ public class MainActivity extends AppCompatActivity {
         btn_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn_0.setPressed(false);
-                btn_1.setPressed(true);
-                btn_2.setPressed(false);
-                btn_3.setPressed(false);
+                btn_0.setChecked(false);
+                btn_1.setChecked(true);
+                btn_2.setChecked(false);
+                btn_3.setChecked(false);
 
                 setJson();
             }
@@ -112,10 +113,10 @@ public class MainActivity extends AppCompatActivity {
         btn_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn_0.setPressed(false);
-                btn_1.setPressed(false);
-                btn_2.setPressed(true);
-                btn_3.setPressed(false);
+                btn_0.setChecked(false);
+                btn_1.setChecked(false);
+                btn_2.setChecked(true);
+                btn_3.setChecked(false);
 
                 setJson();
             }
@@ -124,10 +125,10 @@ public class MainActivity extends AppCompatActivity {
         btn_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn_0.setPressed(false);
-                btn_1.setPressed(false);
-                btn_2.setPressed(false);
-                btn_3.setPressed(true);
+                btn_0.setChecked(false);
+                btn_1.setChecked(false);
+                btn_2.setChecked(false);
+                btn_3.setChecked(true);
 
                 setJson();
             }
@@ -139,13 +140,13 @@ public class MainActivity extends AppCompatActivity {
         JSONObject data = new JSONObject();
         int index=0;
 
-        if(btn_0.isPressed())
+        if(btn_0.isChecked())
             index = 0;
-        else if(btn_1.isPressed())
+        else if(btn_1.isChecked())
             index = 1;
-        else if(btn_2.isPressed())
+        else if(btn_2.isChecked())
             index = 2;
-        else if(btn_3.isPressed())
+        else if(btn_3.isChecked())
             index = 3;
 
         try {

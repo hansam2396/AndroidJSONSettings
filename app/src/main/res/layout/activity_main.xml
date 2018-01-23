@@ -16,7 +16,7 @@
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:contentDescription="@string/circlevr_logo"
             android:scaleType="center"
@@ -91,22 +91,24 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
+                <ToggleButton
                     android:id="@+id/btn0"
                     style="@style/btnStyleAcapulco"
                     android:layout_width="match_parent"
                     android:layout_height="66dp"
                     android:layout_weight="1"
-                    android:text="@string/_0"
+                    android:textOff="@string/_0"
+                    android:textOn="@string/_0"
                     android:textSize="24sp" />
 
-                <Button
+                <ToggleButton
                     android:id="@+id/btn1"
                     style="@style/btnStyleAcapulco"
                     android:layout_width="match_parent"
                     android:layout_height="66dp"
                     android:layout_weight="1"
-                    android:text="@string/_1"
+                    android:textOff="@string/_1"
+                    android:textOn="@string/_1"
                     android:textSize="24sp" />
             </LinearLayout>
 
@@ -116,22 +118,24 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
+                <ToggleButton
                     android:id="@+id/btn2"
                     style="@style/btnStyleAcapulco"
                     android:layout_width="match_parent"
                     android:layout_height="66dp"
                     android:layout_weight="1"
-                    android:text="@string/_2"
+                    android:textOff="@string/_2"
+                    android:textOn="@string/_2"
                     android:textSize="24sp" />
 
-                <Button
+                <ToggleButton
                     android:id="@+id/btn3"
                     style="@style/btnStyleAcapulco"
                     android:layout_width="match_parent"
                     android:layout_height="66dp"
                     android:layout_weight="1"
-                    android:text="@string/_3"
+                    android:textOff="@string/_3"
+                    android:textOn="@string/_3"
                     android:textSize="24sp" />
             </LinearLayout>
 
