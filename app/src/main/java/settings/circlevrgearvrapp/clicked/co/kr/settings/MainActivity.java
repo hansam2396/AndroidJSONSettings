@@ -28,10 +28,10 @@ public class MainActivity extends AppCompatActivity {
     EditText ipTxt;
     EditText portTxt;
 
-    ToggleButton btn_0;
     ToggleButton btn_1;
     ToggleButton btn_2;
     ToggleButton btn_3;
+    ToggleButton btn_4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +40,10 @@ public class MainActivity extends AppCompatActivity {
 
         ipTxt = (EditText) findViewById(R.id.ipInput);
         portTxt = (EditText) findViewById(R.id.portInput);
-        btn_0 = (ToggleButton) findViewById(R.id.btn0);
         btn_1 = (ToggleButton) findViewById(R.id.btn1);
         btn_2 = (ToggleButton) findViewById(R.id.btn2);
         btn_3 = (ToggleButton) findViewById(R.id.btn3);
+        btn_4 = (ToggleButton) findViewById(R.id.btn4);
 
         ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE);
 
@@ -52,14 +52,14 @@ public class MainActivity extends AppCompatActivity {
             portTxt.setText(new String(String.valueOf(port)));
             int index = Integer.parseInt(new String(userId));
 
-            if(index == 0)
-                btn_0.setChecked(true);
-            else if(index == 1)
+            if(index == 1)
                 btn_1.setChecked(true);
             else if(index == 2)
                 btn_2.setChecked(true);
             else if(index == 3)
                 btn_3.setChecked(true);
+            else if(index == 4)
+                btn_4.setChecked(true);
         }
 
         ipTxt.addTextChangedListener(new TextWatcher() {
@@ -86,25 +86,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btn_0.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btn_0.setChecked(true);
-                btn_1.setChecked(false);
-                btn_2.setChecked(false);
-                btn_3.setChecked(false);
-
-                setJson();
-            }
-        });
-
         btn_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn_0.setChecked(false);
                 btn_1.setChecked(true);
                 btn_2.setChecked(false);
                 btn_3.setChecked(false);
+                btn_4.setChecked(false);
 
                 setJson();
             }
@@ -113,10 +101,10 @@ public class MainActivity extends AppCompatActivity {
         btn_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn_0.setChecked(false);
                 btn_1.setChecked(false);
                 btn_2.setChecked(true);
                 btn_3.setChecked(false);
+                btn_4.setChecked(false);
 
                 setJson();
             }
@@ -125,10 +113,22 @@ public class MainActivity extends AppCompatActivity {
         btn_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn_0.setChecked(false);
                 btn_1.setChecked(false);
                 btn_2.setChecked(false);
                 btn_3.setChecked(true);
+                btn_4.setChecked(false);
+
+                setJson();
+            }
+        });
+
+        btn_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn_1.setChecked(false);
+                btn_2.setChecked(false);
+                btn_3.setChecked(false);
+                btn_4.setChecked(true);
 
                 setJson();
             }
@@ -140,14 +140,14 @@ public class MainActivity extends AppCompatActivity {
         JSONObject data = new JSONObject();
         int index=0;
 
-        if(btn_0.isChecked())
-            index = 0;
-        else if(btn_1.isChecked())
+        if(btn_1.isChecked())
             index = 1;
         else if(btn_2.isChecked())
             index = 2;
         else if(btn_3.isChecked())
             index = 3;
+        else if(btn_4.isChecked())
+            index = 4;
 
         try {
             data.put("gcsAddress", ipTxt.getText().toString());

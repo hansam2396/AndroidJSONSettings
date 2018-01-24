@@ -14,15 +14,14 @@
         android:visibility="visible">
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/imageView2"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:contentDescription="@string/circlevr_logo"
-            android:scaleType="center"
-            app:srcCompat="@drawable/circlevr"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp" />
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/circlevr" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,16 +91,6 @@
                 android:orientation="horizontal">
 
                 <ToggleButton
-                    android:id="@+id/btn0"
-                    style="@style/btnStyleAcapulco"
-                    android:layout_width="match_parent"
-                    android:layout_height="66dp"
-                    android:layout_weight="1"
-                    android:textOff="@string/_0"
-                    android:textOn="@string/_0"
-                    android:textSize="24sp" />
-
-                <ToggleButton
                     android:id="@+id/btn1"
                     style="@style/btnStyleAcapulco"
                     android:layout_width="match_parent"
@@ -110,13 +99,6 @@
                     android:textOff="@string/_1"
                     android:textOn="@string/_1"
                     android:textSize="24sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
 
                 <ToggleButton
                     android:id="@+id/btn2"
@@ -127,6 +109,13 @@
                     android:textOff="@string/_2"
                     android:textOn="@string/_2"
                     android:textSize="24sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <ToggleButton
                     android:id="@+id/btn3"
@@ -136,6 +125,16 @@
                     android:layout_weight="1"
                     android:textOff="@string/_3"
                     android:textOn="@string/_3"
+                    android:textSize="24sp" />
+
+                <ToggleButton
+                    android:id="@+id/btn4"
+                    style="@style/btnStyleAcapulco"
+                    android:layout_width="match_parent"
+                    android:layout_height="66dp"
+                    android:layout_weight="1"
+                    android:textOff="@string/_4"
+                    android:textOn="@string/_4"
                     android:textSize="24sp" />
             </LinearLayout>
 
