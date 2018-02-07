@@ -49,7 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
         if(parseJSONData()){
             ipTxt.setText(new String(ip));
-            portTxt.setText(new String(String.valueOf(port)));
+            if(port != 999999)
+                portTxt.setText(new String(String.valueOf(port)));
+            else
+                portTxt.setText(new String(""));
             int index = Integer.parseInt(new String(userId));
 
             if(index == 1)
@@ -63,8 +66,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         ipTxt.addTextChangedListener(new TextWatcher() {
+
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 setJson();
@@ -76,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
         portTxt.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 setJson();
@@ -151,12 +157,14 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             data.put("gcsAddress", ipTxt.getText().toString());
-            data.put("gcsPort", Integer.parseInt(portTxt.getText().toString()));
+            if(!portTxt.getText().toString().equals(""))
+                data.put("gcsPort", Integer.parseInt(portTxt.getText().toString()));
+            else
+                data.put("gcsPort", null);
             data.put("UserID", String.valueOf(index));
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         parseStringData(data);
     }
 
@@ -185,7 +193,10 @@ public class MainActivity extends AppCompatActivity {
             JSONObject = new JSONObject(JSONString);
 
             ip = JSONObject.getString("gcsAddress");
-            port = JSONObject.getInt("gcsPort");
+            if(!JSONObject.isNull("gcsPort"))
+                port = JSONObject.getInt("gcsPort");
+            else
+                port = 999999;
             userId = JSONObject.getString("UserID");
 
             Toast.makeText(this, "로드 완료", Toast.LENGTH_SHORT).show();
